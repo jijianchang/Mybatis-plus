@@ -4,7 +4,7 @@
 
 
     <select id="findall" resultType="com.example.sysUser.entity.User">
-        select * from user where NAME='tom';
+        select * from user where NAME='jjc';
 
 
 

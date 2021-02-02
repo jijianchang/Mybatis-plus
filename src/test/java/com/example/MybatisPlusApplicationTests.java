@@ -1,5 +1,6 @@
 package com.example;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.sysUser.entity.User;
 import com.example.sysUser.mapper.UserMapper;
@@ -96,6 +97,35 @@ class MybatisPlusApplicationTests {
             System.out.println(user1);
         }*/
 
+    }
+
+    @Test
+    public void test2(){
+        User user = new User();
+        user.setName("tyrtt");
+        user.setAge(16);
+        user.setEmail("ruy@163.com");
+        user.setId(1356603225096060931L);
+//        userService.save(user);
+        userService.saveOrUpdate(user);
+
+    }
+
+    @Test
+    public void testQueryWrapper() {
+        // Step1：创建一个 QueryWrapper 对象
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+
+        // Step2： 构造查询条件
+        queryWrapper
+                .select("id", "name", "age")
+                .eq("age", 20)
+                .like("name", "j");
+
+        // Step3：执行查询
+        userService
+                .list(queryWrapper)
+                .forEach(System.out::println);
     }
 
 }
