@@ -20,7 +20,7 @@ mybatis-plus:
     map-underscore-to-camel-case: true
     auto-mapping-behavior: full
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-  mapper-locations: classpath*:mapper/**/*Mapper.xml
+  mapper-locations: classpath*:com/example/**/mapper/xml/*.xml
   global-config:
     # 逻辑删除配置
     db-config:

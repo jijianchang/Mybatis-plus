@@ -1,9 +1,10 @@
 package com.example.sysUser.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.*;
+
 import java.io.Serializable;
+import java.util.Date;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -17,6 +18,7 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
+@TableName("user")
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -36,12 +38,33 @@ public class User implements Serializable {
     /**
      * 年龄
      */
+    @TableField("age")
     private Integer age;
 
     /**
      * 邮箱
      */
+    @TableField("email")
     private String email;
 
+    /**
+     * 创建时间
+     */
+    @TableField(value = "create_time",fill = FieldFill.INSERT_UPDATE)
+    private Date createTime;
+
+    /**
+     * 最后修改时间
+     */
+    @TableField(value = "update_time",fill = FieldFill.INSERT_UPDATE)
+    private Date updateTime;
+
+    @TableLogic(value = "0",delval = "1")
+    @TableField(value = "delete_flag",fill = FieldFill.INSERT)
+    private Integer deleteFlag;
+
+    @Version
+    @TableField(fill = FieldFill.INSERT)
+    private Integer version;
 
 }
