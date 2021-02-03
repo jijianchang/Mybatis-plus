@@ -18,4 +18,6 @@ import java.util.List;
 public interface UserMapper extends BaseMapper<User> {
     public User findall();
 
+    public List<User> selectall();
+
 }

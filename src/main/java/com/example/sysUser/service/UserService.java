@@ -16,4 +16,6 @@ import java.util.List;
 public interface UserService extends IService<User> {
 
     User findAll();
+    List<User> selectall();
+    void updatebyid();
 }

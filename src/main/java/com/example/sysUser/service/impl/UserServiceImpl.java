@@ -1,5 +1,6 @@
 package com.example.sysUser.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.example.sysUser.entity.User;
 import com.example.sysUser.mapper.UserMapper;
 import com.example.sysUser.service.UserService;
@@ -25,5 +26,17 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Override
     public User findAll() {
         return userMapper.findall();
+    }
+
+    @Override
+    public List<User> selectall() {
+        return userMapper.selectall();
+    }
+
+    @Override
+    public void updatebyid() {
+        UpdateWrapper<User> userUpdateWrapper = new UpdateWrapper<>();
+        userUpdateWrapper.eq("id",1356449881186443266L).set("age",69);
+        userMapper.update(null,userUpdateWrapper);
     }
 }

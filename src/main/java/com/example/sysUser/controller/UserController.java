@@ -35,5 +35,15 @@ public class UserController {
        return userService.findAll();
     }
 
+    @GetMapping("/selectall")
+    public List<User> selectAll(){
+        return userService.selectall();
+    }
+
+    @GetMapping("/updatebyid")
+    public void updateById(){
+         userService.updatebyid();
+    }
+
 }
 

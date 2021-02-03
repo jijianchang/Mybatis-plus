@@ -4,9 +4,10 @@
 
 
     <select id="findall" resultType="com.example.sysUser.entity.User">
-        select * from user where NAME='jjc';
+        select * from user where NAME='tom';
 
-
-
+    </select>
+    <select id="selectall" resultType="com.example.sysUser.entity.User">
+        select * from user;
     </select>
 </mapper>

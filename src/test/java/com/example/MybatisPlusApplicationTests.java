@@ -1,6 +1,10 @@
 package com.example;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.conditions.query.LambdaQueryChainWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.sysUser.entity.User;
 import com.example.sysUser.mapper.UserMapper;
@@ -10,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
+import java.util.Map;
 
 @SpringBootTest
 class MybatisPlusApplicationTests {
@@ -79,7 +84,7 @@ class MybatisPlusApplicationTests {
     @Test
     public void test1() {
         User user = new User();
-        user.setName("ttt");
+        user.setName("tom");
         user.setAge(16);
         user.setEmail("tom@163.com");
         user.setId(1356470619356344321L);
@@ -111,7 +116,7 @@ class MybatisPlusApplicationTests {
 
     }
 
-    @Test
+ /*   @Test
     public void testQueryWrapper() {
         // Step1：创建一个 QueryWrapper 对象
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
@@ -126,6 +131,43 @@ class MybatisPlusApplicationTests {
         userService
                 .list(queryWrapper)
                 .forEach(System.out::println);
+    }*/
+
+    @Test
+    public void testQueryWrapper(){
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        /*queryWrapper.eq("NAME","tom");
+        User user = userMapper.selectOne(queryWrapper);
+        System.out.println(user);*/
+        queryWrapper.eq("age",12);
+       /* Integer count = userMapper.selectCount(queryWrapper);
+        System.out.println(count);*/
+       /* List<User> users = userMapper.selectList(queryWrapper);
+        System.out.println(users);*/
+        List<Map<String, Object>> maps = userMapper.selectMaps(queryWrapper);
+        System.out.println(maps);
+
+
+    }
+
+    @Test
+    public void testLambdaQueryWrapper(){
+       /* LambdaQueryWrapper<User> lambdaQuery= Wrappers.<User>lambdaQuery();
+        lambdaQuery.likeRight(User::getName,"t")
+                .and(lqw->lqw.lt(User::getAge,15).or().isNotNull(User::getEmail));
+        List<User> userList=userMapper.selectList(lambdaQuery);*/
+        List<User> userList=new LambdaQueryChainWrapper<User>(userMapper)
+                .like(User::getName,"t").le(User::getAge,20).list();
+        userList.forEach(System.out::println);
+    }
+
+    @Test
+    public void testLambdaUpdateWrapper(){
+        LambdaUpdateWrapper<User> lambdaUpdate = Wrappers.lambdaUpdate();
+        lambdaUpdate.eq(User::getAge,12).set(User::getName,"jovk");
+        userMapper.update(null,lambdaUpdate);
+
+
     }
 
 }
