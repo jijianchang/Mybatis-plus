@@ -28,3 +28,10 @@ mybatis-plus:
       logic-not-delete-value: 1
       # 删除后
       logic-delete-value: 0
+
+swagger:
+  production: false
+  basic:
+    enable: true
+    username: admin
+    password: 123456

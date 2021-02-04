@@ -46,9 +46,9 @@ public class AutoGenerate {
         // 配置是否打开目录，false 为不打开（可选）
         gc.setOpen(false);
         // 实体属性 Swagger2 注解，添加 Swagger 依赖，开启 Swagger2 模式（可选）
-        //gc.setSwagger2(true);
+        gc.setSwagger2(true);
         // 重新生成文件时是否覆盖，false 表示不覆盖（可选）
-        gc.setFileOverride(false);
+        gc.setFileOverride(true);
         // 配置主键生成策略，此处为 ASSIGN_ID（可选）
         gc.setIdType(IdType.ASSIGN_ID);
         // 配置日期类型，此处为 ONLY_DATE（可选）
