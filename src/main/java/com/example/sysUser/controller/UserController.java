@@ -3,18 +3,19 @@ package com.example.sysUser.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.sysUser.entity.User;
 import com.example.sysUser.service.UserService;
+import com.example.config.exception.RRException;
 import com.example.utils.Result;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.*;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
@@ -26,7 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Slf4j
 @RestController
-@RequestMapping("/sysUser/user")
+@RequestMapping("/user")
 public class UserController {
 
     @Autowired
@@ -47,6 +48,44 @@ public class UserController {
         result.setResult(JSON.parseObject(JSON.toJSONString(user)));
         return result;
     }
+
+    @GetMapping("/exception")
+    @ApiOperation(value="全局异常", notes="全局异常")
+    public Result<String> getexception(@RequestParam Integer id) {
+        if (id == 1) {
+            throw new RRException("id不能为空！");
+        }
+        int i=1/0;
+        Result<String> result = new Result<>();
+        result.setSuccess(true);
+        result.setResult("id有值");
+        return result;
+
+    }
+
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @ApiOperation(value="登录", notes="登录")
+    public Result<JSONObject> login(@RequestParam("username") String username, @RequestParam("password") String password) {
+        // 从SecurityUtils里边创建一个 subject
+        Subject subject = SecurityUtils.getSubject();
+        // 在认证提交前准备 token（令牌）
+        UsernamePasswordToken token = new UsernamePasswordToken(username, password);
+        subject.login(token);
+        Result<JSONObject> result = new Result();
+        if (subject.isAuthenticated()) {
+            result.setSuccess(true);
+            result.setMessage("登录成功");
+            return result;
+        } else {
+            token.clear();
+            result.setSuccess(false);
+            result.setMessage("登录失败");
+            return result;
+        }
+    }
+
+
+
 
 }
 

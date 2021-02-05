@@ -1,4 +1,4 @@
-package com.example.config;
+package com.example.config.mybatis_plusconfig;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.core.exceptions.MybatisPlusException;

@@ -1,8 +1,7 @@
-package com.example.config;
+package com.example.config.mybatis_plusconfig;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import org.apache.ibatis.reflection.MetaObject;
-import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
