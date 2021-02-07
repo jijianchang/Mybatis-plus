@@ -15,7 +15,7 @@ import java.util.Arrays;
 
 @Slf4j
 @SpringBootApplication
-@MapperScan("com.example.sysUser.mapper")
+@MapperScan("com.example.*.mapper")
 public class MybatisPlusApplication extends SpringBootServletInitializer implements CommandLineRunner {
 
     @Override

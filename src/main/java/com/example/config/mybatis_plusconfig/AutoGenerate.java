@@ -75,7 +75,7 @@ public class AutoGenerate {
         // 配置父包名（需要修改）
         pc.setParent("com.example");
         // 配置模块名（需要修改）
-        pc.setModuleName("sysUser");
+        pc.setModuleName("login");
         // 配置 entity 包名
         pc.setEntity("entity");
         // 配置 mapper 包名
