@@ -21,7 +21,7 @@ class MybatisPlusApplicationTests {
     @Autowired
     private LoginService loginService;
 
-    @Test
+    /*@Test
     public void test1(){
         User user = new User();
         user.setUsername("jjc");
@@ -30,6 +30,15 @@ class MybatisPlusApplicationTests {
         user.setEmail("tom@163.com");
         loginService.save(user);
     }
+    @Test
+    public void test2(){
+        User user = new User();
+        user.setUsername("jjc");
+        user.setPassword("123");
+        user.setAge(12);
+        user.setEmail("tom@163.com");
+        loginService.save(user);
+    }*/
 /*    @Autowired
     private UserService userService;
     @Autowired

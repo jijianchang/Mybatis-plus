@@ -1,5 +1,6 @@
 package com.example.login.mapper;
 
+import com.example.login.entity.Role;
 import com.example.login.entity.User;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
@@ -13,4 +14,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface LoginMapper extends BaseMapper<User> {
 
+     User getUserbyname(String name);
 }

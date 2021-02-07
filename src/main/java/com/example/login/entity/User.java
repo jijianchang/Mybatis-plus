@@ -3,6 +3,7 @@ package com.example.login.entity;
 import com.baomidou.mybatisplus.annotation.*;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -20,6 +21,7 @@ import java.util.Set;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
+@AllArgsConstructor
 @ApiModel(value="User对象", description="")
 public class User implements Serializable {
 

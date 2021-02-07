@@ -6,12 +6,11 @@ import com.example.utils.Result;
 import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.subject.Subject;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
@@ -44,6 +43,15 @@ public class LoginController {
             return result;
         }
     }
+
+
+        
+        @ApiOperation(value="浏览", notes="浏览")
+        @PostMapping("/show")
+        public String showUser() {
+            return "这是学生信息";
+        }
+
 
 }
 

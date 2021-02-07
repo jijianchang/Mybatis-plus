@@ -26,13 +26,8 @@ public class CustomRealm  extends AuthorizingRealm {
         /**
          * 权限认证
          */
-        String username = (String) SecurityUtils.getSubject().getPrincipal();
-        SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-        Set<String> stringSet = new HashSet<>();
-        stringSet.add("user:show");
-        stringSet.add("user:admin");
-        info.setStringPermissions(stringSet);
-        return info;
+        System.out.println("shouquan");
+       return null;
     }
 
     /**
