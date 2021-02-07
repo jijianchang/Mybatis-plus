@@ -6,6 +6,8 @@ import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.conditions.query.LambdaQueryChainWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.example.login.entity.User;
+import com.example.login.service.LoginService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,6 +18,18 @@ import java.util.Map;
 @SpringBootTest
 class MybatisPlusApplicationTests {
 
+    @Autowired
+    private LoginService loginService;
+
+    @Test
+    public void test1(){
+        User user = new User();
+        user.setUsername("jjc");
+        user.setPassword("123");
+        user.setAge(12);
+        user.setEmail("tom@163.com");
+        loginService.save(user);
+    }
 /*    @Autowired
     private UserService userService;
     @Autowired

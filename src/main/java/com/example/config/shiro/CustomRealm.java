@@ -1,11 +1,16 @@
 package com.example.config.shiro;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.example.login.entity.User;
+import com.example.login.service.LoginService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -14,6 +19,8 @@ import java.util.Set;
  * @author jijianchang
  */
 public class CustomRealm  extends AuthorizingRealm {
+    @Autowired
+    private LoginService loginService;
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         /**
@@ -37,15 +44,19 @@ public class CustomRealm  extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         System.out.println("-------身份认证方法--------");
-        String userName = (String) authenticationToken.getPrincipal();
-        String userPwd = new String((char[]) authenticationToken.getCredentials());
-        //根据用户名从数据库获取密码
-        String password = "123";
-        if (!userName.equals("jjc")) {
-            throw new UnknownAccountException("用户名不正确");
-        } else if (!userPwd.equals(password )) {
-            throw new IncorrectCredentialsException("密码不正确");
+        if (StringUtils.isEmpty(authenticationToken.getPrincipal())) {
+            return null;
         }
-        return new SimpleAuthenticationInfo(userName, password,getName());
+        //获取用户信息
+        String name = authenticationToken.getPrincipal().toString();
+        User user = loginService.getOne(new LambdaQueryWrapper<User>().eq(User::getUsername,name));
+        if (user == null) {
+            //这里返回后会报出对应异常
+            return null;
+        } else {
+            //这里验证authenticationToken和simpleAuthenticationInfo的信息
+            SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(user, user.getPassword().toString(), getName());
+            return simpleAuthenticationInfo;
+        }
     }
 }
