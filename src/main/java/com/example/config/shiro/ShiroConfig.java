@@ -34,31 +34,31 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setUnauthorizedUrl("/notRole");
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
         // <!-- authc:所有url都必须认证通过才可以访问; anon:所有url都都可以匿名访问-->
-//        filterChainDefinitionMap.put("/login/**", "anon");
-        filterChainDefinitionMap.put("/", "anon");
-//        filterChainDefinitionMap.put("/front/**", "anon");
-//        filterChainDefinitionMap.put("/api/**", "anon");
-//        filterChainDefinitionMap.put("/doc.html", "anon");
-//        filterChainDefinitionMap.put("/**/*.js", "anon");
-//        filterChainDefinitionMap.put("/**/*.css", "anon");
-//        filterChainDefinitionMap.put("/**/*.html", "anon");
-//        filterChainDefinitionMap.put("/**/*.svg", "anon");
-//        filterChainDefinitionMap.put("/**/*.jpg", "anon");
-//        filterChainDefinitionMap.put("/**/*.pdf", "anon");
-//        filterChainDefinitionMap.put("/**/*.png", "anon");
-//        filterChainDefinitionMap.put("/**/*.ico", "anon");
-//        filterChainDefinitionMap.put("/druid/**", "anon");
-//        filterChainDefinitionMap.put("/swagger-ui.html", "anon");
-//        filterChainDefinitionMap.put("/swagger**/**", "anon");
-//        filterChainDefinitionMap.put("/webjars/**", "anon");
-//        filterChainDefinitionMap.put("/v2/**", "anon");
-//
-//        filterChainDefinitionMap.put("/user/**", "authc");
-//
-//        filterChainDefinitionMap.put("/admin/**", "authc");
-//
-//        //主要这行代码必须放在所有权限设置的最后，不然会导致所有 url 都被拦截 剩余的都需要认证
-//        filterChainDefinitionMap.put("/**", "authc");
+        filterChainDefinitionMap.put("/login/**", "anon");
+//        filterChainDefinitionMap.put("/show", "anon");
+        filterChainDefinitionMap.put("/front/**", "anon");
+        filterChainDefinitionMap.put("/api/**", "anon");
+        filterChainDefinitionMap.put("/doc.html", "anon");
+        filterChainDefinitionMap.put("/**/*.js", "anon");
+        filterChainDefinitionMap.put("/**/*.css", "anon");
+        filterChainDefinitionMap.put("/**/*.html", "anon");
+        filterChainDefinitionMap.put("/**/*.svg", "anon");
+        filterChainDefinitionMap.put("/**/*.jpg", "anon");
+        filterChainDefinitionMap.put("/**/*.pdf", "anon");
+        filterChainDefinitionMap.put("/**/*.png", "anon");
+        filterChainDefinitionMap.put("/**/*.ico", "anon");
+        filterChainDefinitionMap.put("/druid/**", "anon");
+        filterChainDefinitionMap.put("/swagger-ui.html", "anon");
+        filterChainDefinitionMap.put("/swagger**/**", "anon");
+        filterChainDefinitionMap.put("/webjars/**", "anon");
+        filterChainDefinitionMap.put("/v2/**", "anon");
+
+        filterChainDefinitionMap.put("/user/**", "authc");
+
+        filterChainDefinitionMap.put("/admin/**", "authc");
+
+        //主要这行代码必须放在所有权限设置的最后，不然会导致所有 url 都被拦截 剩余的都需要认证
+        filterChainDefinitionMap.put("/**", "authc");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;
 

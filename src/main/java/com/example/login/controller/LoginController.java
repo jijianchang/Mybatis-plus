@@ -21,9 +21,8 @@ import org.springframework.web.bind.annotation.*;
  * @since 2021-02-07
  */
 @RestController
-@RequestMapping("/login")
 public class LoginController {
-    @RequestMapping(value = "/user", method = RequestMethod.POST)
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ApiOperation(value="登录", notes="登录")
     public Result<JSONObject> login(@RequestParam("username") String username, @RequestParam("password") String password) {
         // 从SecurityUtils里边创建一个 subject
@@ -46,11 +45,7 @@ public class LoginController {
 
 
         
-        @ApiOperation(value="浏览", notes="浏览")
-        @PostMapping("/show")
-        public String showUser() {
-            return "这是学生信息";
-        }
+
 
 
 }
