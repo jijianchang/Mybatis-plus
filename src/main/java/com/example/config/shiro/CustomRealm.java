@@ -9,6 +9,7 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 
@@ -27,11 +28,9 @@ public class CustomRealm  extends AuthorizingRealm {
          * 权限认证
          */
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-        Set<String> stringSet = new HashSet<>();
-        stringSet.add("user:show");
-        stringSet.add("user:admin");
-        System.out.println("授权拉");
-        info.setStringPermissions(stringSet);
+        User user = (User) SecurityUtils.getSubject().getPrincipal();
+        info.addStringPermission(user.getPerms());
+        System.out.println("授权");
         return info;
     }
 

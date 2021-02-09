@@ -20,11 +20,11 @@ import org.springframework.web.bind.annotation.*;
  * @author jjc
  * @since 2021-02-07
  */
-@RestController
+@Controller
 public class LoginController {
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    /*@RequestMapping(value = "/login", method = RequestMethod.POST)
     @ApiOperation(value="登录", notes="登录")
-    public Result<JSONObject> login(@RequestParam("username") String username, @RequestParam("password") String password) {
+        public Result<JSONObject> login(@RequestParam("username") String username, @RequestParam("password") String password) {
         // 从SecurityUtils里边创建一个 subject
         Subject subject = SecurityUtils.getSubject();
         // 在认证提交前准备 token（令牌）
@@ -41,9 +41,34 @@ public class LoginController {
             result.setMessage("登录失败");
             return result;
         }
+    }*/
+
+    @RequestMapping(value = "/login")
+    @ApiOperation(value="登录", notes="登录")
+    public String login(@RequestParam("username") String username, @RequestParam("password") String password) {
+        // 从SecurityUtils里边创建一个 subject
+        Subject subject = SecurityUtils.getSubject();
+        // 在认证提交前准备 token（令牌）
+        UsernamePasswordToken token = new UsernamePasswordToken(username, password);
+        subject.login(token);
+        if (subject.isAuthenticated()) {
+           return "index";
+        } else {
+            token.clear();
+            return "login";
+        }
     }
 
+    @RequestMapping("/tologin")
+    public String tologin(){
+        return "login";
+    }
 
+    @RequestMapping("/noauth")
+    @ResponseBody
+    public String notRole(){
+        return "无权限访问";
+    }
         
 
 

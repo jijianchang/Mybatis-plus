@@ -11,21 +11,22 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * @author jijianchang
  */
-@RestController
+@Controller
+@RequestMapping("/user")
 public class UserController {
 
-    @RequiresPermissions("user:show")
-    @RequestMapping(value = "/show",method = RequestMethod.GET)
+    @RequiresPermissions("user:add")
+    @RequestMapping(value = "/add")
     @ApiOperation(value="浏览", notes="浏览")
     public String showUser() {
-        return "这是学生信息";
+        return "user/add";
     }
 
-    @RequiresPermissions("user:admin")
-    @RequestMapping(value = "/admin",method = RequestMethod.GET)
+    @RequiresPermissions("user:update")
+    @RequestMapping(value = "/update")
     @ApiOperation(value="管理员", notes="管理员")
     public String adminUser() {
-        return "这是管理员信息";
+        return "user/update";
     }
 
 

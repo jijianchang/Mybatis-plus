@@ -8,6 +8,9 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+
+import java.io.Serializable;
 
 /**
  * @author jijianchang
@@ -15,8 +18,9 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @AllArgsConstructor
+@NoArgsConstructor
 @ApiModel(value="权限", description="")
-public class Permissions {
+public class Permissions implements Serializable {
     @ApiModelProperty(value = "主键ID")
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     private String id;

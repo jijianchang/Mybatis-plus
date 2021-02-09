@@ -1,6 +1,7 @@
 package com.example.config.shiro;
 
 
+import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.mgt.DefaultSessionStorageEvaluator;
 import org.apache.shiro.mgt.DefaultSubjectDAO;
@@ -30,8 +31,8 @@ public class ShiroConfig {
     public ShiroFilterFactoryBean shiroFilter(DefaultWebSecurityManager securityManager) {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(securityManager);
-        shiroFilterFactoryBean.setLoginUrl("/login");
-        shiroFilterFactoryBean.setUnauthorizedUrl("/notRole");
+        shiroFilterFactoryBean.setLoginUrl("/tologin");
+        shiroFilterFactoryBean.setUnauthorizedUrl("/noauth");
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
         // <!-- authc:所有url都必须认证通过才可以访问; anon:所有url都都可以匿名访问-->
         filterChainDefinitionMap.put("/login/**", "anon");
@@ -89,6 +90,14 @@ public class ShiroConfig {
         customRealm.setCredentialsMatcher(hashedCredentialsMatcher());
         customRealm.setCachingEnabled(false);*/
         return customRealm;
+    }
+
+    @Bean(name = "shiroDialect")
+
+    public ShiroDialect shiroDialect(){
+
+        return new ShiroDialect();
+
     }
 
     /**

@@ -1,25 +1,61 @@
 package com.example;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.baomidou.mybatisplus.extension.conditions.query.LambdaQueryChainWrapper;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.alibaba.druid.pool.DruidDataSource;
+
+import com.example.login.entity.Permissions;
 import com.example.login.entity.User;
-import com.example.login.service.LoginService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.RedisTemplate;
 
+
+import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
 @SpringBootTest
 class MybatisPlusApplicationTests {
 
+    //DI注入数据源
     @Autowired
-    private LoginService loginService;
+    DataSource dataSource;
+
+    @Autowired
+    @Qualifier("redisTemplate")
+    private RedisTemplate redisTemplate;
+
+    @Test
+    public void contextLoads() throws SQLException {
+        //看一下默认数据源
+        System.out.println(dataSource.getClass());
+        //获得连接
+        Connection connection =   dataSource.getConnection();
+        System.out.println(connection);
+
+        DruidDataSource druidDataSource = (DruidDataSource) dataSource;
+        System.out.println("druidDataSource 数据源最大连接数：" + druidDataSource.getMaxActive());
+        System.out.println("druidDataSource 数据源初始化连接数：" + druidDataSource.getInitialSize());
+
+        //关闭连接
+        connection.close();
+    }
+
+    @Test
+    public void redistest(){
+       /* redisTemplate.opsForValue().set("key","吉见长");
+        Object key = redisTemplate.opsForValue().get("key");
+        System.out.println(key);*/
+        Permissions sas = new Permissions("1", "sas");
+        redisTemplate.opsForValue().set("sas",sas);
+        System.out.println(redisTemplate.opsForValue().get("sas"));
+
+    }
+    /*@Autowired
+    private LoginService loginService;*/
 
     /*@Test
     public void test1(){
